@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+</head>
+<style>
+     
+     body{
+        justify-content: center;
+        margin-top: 80px;
+        display: flex;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     }
+     li{
+     padding: 4px;
+      background: #f4f4f4;
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+     cursor: pointer;
+     }
+
+</style>
+   
+<body>
+    <div class="container">
+        <h2>To do List</h2>
+        <input type="text" id="taskInput" placeholder="add a task ">
+        <button onclick="addTask()">Add</button>
+
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        function addTask() {
+            const input = document.getElementById("taskInput");
+            const taskText = input.value.trim();
+
+            if (taskText === "") return;//empty task don't add
+
+            const li = document.createElement("li");
+            li.textContent = taskText;
+
+            //mark as completed
+            li.onclick = () => {
+                li.classList.toggle("completed");
+            };
+            // delete button
+            const dltbtn = document.createElement("button");
+            dltbtn.textContent = "X";
+            dltbtn.onclick = (e) => {
+                e.stopPropagation(); // prevent triggering complete toggle
+                li.remove();
+            };
+
+            // li.appendChild(dltbtn);
+            // document.getElementById("taskList").appendChild(li);
+            // input.value = "";
+            li.appendChild(dltbtn);
+            document.getElementById("taskList").appendChild(li);
+
+            input.value = "";
+        }
+
+        
+    </script>
+
+
+</body>
+
+</html>

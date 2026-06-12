@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        /* background-color: rgb(71, 58, 58); */
+    }
+
+    #main {
+        padding: 30px;
+        display: block;
+        align-items: center;
+
+        width: 100%;
+        height: 100%;
+        /* background-color: #222; */
+
+    }
+
+    input {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .card{
+        max-width: 400px;
+        margin: 40px;
+        display: inline-block;
+        padding: 20px;
+        border: 1px solid #555;
+        border-radius: 10px;
+        color: black;
+
+    }
+     .profile{
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      border-radius: 50%;
+      margin-bottom: 7px;
+      overflow: hidden;
+
+    }
+    .profile img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .card h5{
+        margin-top: 5px;
+    } 
+    .card p{
+        box-sizing: border-box;
+        font-size:12px;
+        margin-top: 10px;
+
+    }
+</style>
+
+<body>
+    <div id="main">
+        <form action="">
+            <input type="text" name="" id="" placeholder="profile pic">
+            <input type="text" name="" id="" placeholder="name">
+            <input type="text" placeholder="occupationn">
+            <input type="text" name="" id="" placeholder="Info">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
+
+
+    <script>
+        let inputs =document.querySelectorAll("input[type='text']")
+        let form = document.querySelector("form");
+        let main = document.querySelector("#main");
+
+        form.addEventListener("submit",function(dets){
+            dets.preventDefault();// form page load huna bata rokhx yesle or  page load huna nadina
+            
+            let card = document.createElement("div");
+            card.classList.add("card");
+
+            let profile =document.createElement("div");
+            profile.classList.add("profile");
+
+            let img = document.createElement("img");
+            img.setAttribute("src",inputs[0].value);
+
+            let h3 =document.createElement("h3");
+            h3.textContent = inputs[1].value;
+
+            let h5 =document.createElement("h5");
+            h5.textContent=inputs[2].value;
+
+            let p = document.createElement("p");
+            p.textContent=inputs[3].value;
+
+            profile.appendChild(img);
+            card.appendChild(profile);
+
+            card.appendChild(h3);
+            card.appendChild(h5);
+            card.appendChild(p);
+
+            main.appendChild(card);
+         
+            
+
+
+        });
+
+    </script>
+</body>
+
+</html>

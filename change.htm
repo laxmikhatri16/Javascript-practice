@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>change event</title>
+</head>
+<body>
+    <h1 id="phone">select your phone</h1>
+    <select name="" id="">
+        <option  selected disabled> choose your  phone</option>
+        <option value="samsung">Samsung</option>
+        <option value="iphone">iphone</option>
+        <option value="Oppo">Oppo</option><option value="samsung">Samsung</option>
+        <option value="Realme">Realme</option>
+    </select>
+    
+    <script>
+        let slt = document.querySelector("select");
+        let phone =document.querySelector("#phone");
+        slt.addEventListener("change",function(dets){
+            phone.textContent=`${dets.target.value}  selected`;
+            
+        });
+        //dets.target.value le select gareko item ko value return or display garx
+    </script>
+</body>
+</html>

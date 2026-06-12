@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File input</title>
+    <style>
+        *{
+            padding: 0;
+            margin :0;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        #main{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-color: #222;
+            
+        }
+        input{
+            display: none;
+        }
+
+       #btn{
+        color: rgb(232, 238, 236);
+        background-color: rgb(28, 188, 68);
+        border-radius:5px ;
+        padding: 10px 20px;
+       }
+       #btn:hover{
+        background-color: rgb(9, 129, 89);
+       }
+
+    </style>
+</head>
+<body>
+   
+    <div id="main">
+        <input type="file" name="" id="fileinp">
+        <div id="btn">
+            Upload file
+        </div>
+    </div>
+    <script>
+        const defaultText = "Upload file";
+        let btn = document.querySelector("#btn");
+        let fileinp = document.querySelector("#fileinp");
+        btn.addEventListener("click",function(){
+            fileinp.click();
+        });
+        fileinp.addEventListener("change",function(dets){
+            // btn.textContent =dets.target.files[0].name;
+            const file =dets.target.files[0];
+            if(file){
+                btn.textContent = file.name;
+            }else{
+                btn.textContent= defaultText;
+            }
+        })
+    </script>
+    
+</body>
+</html>
