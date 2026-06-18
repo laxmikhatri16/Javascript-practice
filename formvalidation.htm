@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f4f4f4;
+        }
+
+        .container {
+            width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .input-group input:focus {
+            border-color: #3498db;
+        }
+
+        .input-group small {
+            color: red;
+            visibility: hidden;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #3498db;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        /* For validation */
+        .input-group.success input {
+            border-color: green;
+        }
+
+        .input-group.error input {
+            border-color: red;
+        }
+
+        .input-group.error small {
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <form class="form">
+            <h2>Registration Form</h2>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="text" id="email" placeholder="Enter your email">
+                <small></small>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <small></small>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    <script>
+        let email = document.querySelector("#email");
+        let password = document.querySelector("#password")
+        let form = document.querySelector("form");
+
+        form.addEventListener("submit", function (dets) {
+            dets.preventDefault();
+            validateEmail();
+            validatePassword();
+
+            let emailValid = validateEmail();
+            let passwordValid = validatePassword();
+
+            if (emailValid && passwordValid) {// if both value are true then submit
+                form.submit(); // ✅ real submit
+            }
+        });
+
+
+        function setError(input, message) {
+            let parent = input.parentElement;// yema hamile inputko parent div lai  vaneko
+            let small = parent.querySelector("small");//div bata small select gareko
+
+            parent.classList.add("error");//yedi wrong x vane error add hun x sucess remove hunx
+            parent.classList.remove("success");
+
+            small.textContent = message;
+        }
+
+
+        function setSuccess(input) {
+            let parent = input.parentElement;
+
+            parent.classList.add("success");//if right x vane hamile success add garxau ani erro remove garxau
+            parent.classList.remove("error");
+        }
+
+
+        function validateEmail() {
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let value = email.value.trim();
+
+            if (value === "") {
+                setError(email, "Email is required");
+                return false;
+            } else if (!emailRegex.test(value)) {// yesma emailregex ko value test huunx
+                setError(email, "Invalid email");
+                return false;
+            } else {
+                setSuccess(email);
+                return true;
+            }
+        }
+
+        
+
+        function validatePassword() {
+            let passwordRegex =
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+            let value = password.value.trim();
+
+            if (value === "") {
+                setError(password, "Password is required");
+                return false;
+            } else if (!passwordRegex.test(value)) {
+                setError(
+                    password,
+                    "Min 8 chars, 1 uppercase, 1 lowercase, 1 number"
+                );
+                return false;
+            } else {
+                setSuccess(password);
+                return true;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
